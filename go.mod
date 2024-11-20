@@ -1,6 +1,6 @@
 module github.com/friendlycaptcha/batchman
 
-go 1.18
+go 1.21.0
 
 require github.com/stretchr/testify v1.9.0
 
