@@ -30,13 +30,11 @@ func Flush(ctx context.Context, items []MyItemType) {
 
 You then use the builder pattern with `batchman.New[MyItemType]()` and configure it with `MaxSize`, `MaxDelay` and `BufferSize`.
 
+After that you can start it and push items to it.
+
 ```go
 init := batchman.New[MyItemType]().MaxSize(2_000).MaxDelay(10 * time.Second)
-```
 
-Finally, you start the batcher with `Start` and push items to it with `Push`.
-
-```go
 batcher, err := init.Start(ctx, Flush)
 if err != nil {
 	panic(err)
