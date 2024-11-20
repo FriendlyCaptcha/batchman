@@ -7,8 +7,9 @@ import (
 	"sync"
 	"time"
 
+	"math/rand"
+
 	"github.com/friendlycaptcha/batchman"
-	"golang.org/x/exp/rand"
 )
 
 func main() {
