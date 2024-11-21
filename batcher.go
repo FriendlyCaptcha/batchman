@@ -84,7 +84,7 @@ func (b *Batcher[T]) start(ctx context.Context,
 
 		// If the batcher is cancelled and the buffer is not empty, we want to flush the
 		// remaining items with the maximum batch size, so we skip until we reach max size or the buffer is empty.
-		skipFlush := isCancelled && len(b.buffer) > 0 && !isMaxSize
+		skipFlush := (isCancelled && len(b.buffer) > 0 && !isMaxSize) || len(items) == 0
 
 		if !skipFlush {
 			// We need to copy the slice to make sure that the slice that is passed is valid even if asynchronously
