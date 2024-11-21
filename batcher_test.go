@@ -282,4 +282,17 @@ func TestBatcherCancellation(t *testing.T) {
 		assert.ErrorIs(t, batcher.Push(0), ErrBatcherStopped)
 		assert.Equal(t, 0, batcher.CurrentBufferSize())
 	})
+
+	t.Run("no empty flush after cancellation", func(t *testing.T) {
+		t.Parallel()
+		ctx, cancel := context.WithCancel(context.Background())
+
+		_, flusher := startWithMockFlusher(ctx, t, New[int]())
+
+		cancel()
+
+		time.Sleep(time.Millisecond * 5)
+
+		assert.Equal(t, 0, flusher.StartCount())
+	})
 }
